@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freeswitch-exporter
+  namespace: freeswitch
+  labels:
+    app: freeswitch-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freeswitch-exporter
+  template:
+    metadata:
+      labels:
+        app: freeswitch-exporter
+    spec:
+      containers:
+      - name: freeswitch-exporter
+        image: florentchauveau/freeswitch_exporter:latest
+        env:
+        - name: FREESWITCH_EAVESDROP_SERVER
+          value: "freeswitch-service:8021"
+        - name: FREESWITCH_PASSWORD
+          value: "ClueCon"
+        ports:
+        - containerPort: 9282
+          name: metrics
