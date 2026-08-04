@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: freeswitch-service
+  namespace: freeswitch
+spec:
+  selector:
+    app: freeswitch
+  ports:
+  - port: 8021
+    targetPort: 8021
+    name: esl
+  - port: 5060
+    targetPort: 5060
+    name: sip-udp
+    protocol: UDP
+  - port: 5060
+    targetPort: 5060
+    name: sip-tcp
+    protocol: TCP
+    
