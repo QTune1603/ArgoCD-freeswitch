@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freeswitch
+  namespace: freeswitch
+  labels:
+    app: freeswitch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freeswitch
+  template:
+    metadata:
+      labels:
+        app: freeswitch
+    spec:
+      containers:
+      - name: freeswitch
+        image: signalwire/freeswitch:1.10.10-release-11-bullseye
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8021
+          name: esl
+        - containerPort: 5060
+          name: sip-udp
+          protocol: UDP
+        - containerPort: 5060
+          name: sip-tcp
+          protocol: TCP
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/freeswitch/autoload_configs/event_socket.conf.xml
+          subPath: event_socket.conf.xml
+        - name: config-volume
+          mountPath: /etc/freeswitch/autoload_configs/acl.conf.xml
+          subPath: acl.conf.xml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: freeswitch-config
