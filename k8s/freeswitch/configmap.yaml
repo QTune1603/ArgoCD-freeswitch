@@ -19,5 +19,5 @@ data:
         <list name="lan" default="allow">
           <node type="allow" cidr="0.0.0.0/0"/>
         </list>
-      </network-list>
+      </network-lists>
     </configuration>
