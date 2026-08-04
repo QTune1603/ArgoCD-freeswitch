@@ -15,8 +15,8 @@ data:
     </configuration>
   acl.conf.xml: |
     <configuration name="acl.conf" description="Network Lists">
-      <network-list>
-        <list name="lan" defaults="allow">
+      <network-lists>
+        <list name="lan" default="allow">
           <node type="allow" cidr="0.0.0.0/0"/>
         </list>
       </network-list>
