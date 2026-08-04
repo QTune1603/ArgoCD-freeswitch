@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: freeswitch-exporter-service
+  namespace: freeswitch
+  labels:
+    app: freeswitch-exporter
+spec:
+  selector: 
+    app: freeswitch-exporter
+  ports:
+  - port: 9282
+    targetPort: 9282
+    name: metrics
