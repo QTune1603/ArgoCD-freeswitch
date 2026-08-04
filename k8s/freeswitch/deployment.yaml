@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: freeswitch
-        image: signalwire/freeswitch:1.10.10-release-11-bullseye
+        image: safarov/freeswitch:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8021
