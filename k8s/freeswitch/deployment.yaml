@@ -19,6 +19,9 @@ spec:
       - name: freeswitch
         image: safarov/freeswitch:latest
         imagePullPolicy: IfNotPresent
+        args:
+        - -nf
+        - -nc
         ports:
         - containerPort: 8021
           name: esl
