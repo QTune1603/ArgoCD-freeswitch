@@ -19,8 +19,8 @@ spec:
       - name: freeswitch-exporter
         image: florentchauveau/freeswitch_exporter:latest
         args:
-        - -freeswitch.address=freeswitch-service:8021
-        - -freeswitch.password=ClueCon
+        - --freeswitch.address=freeswitch-service:8021
+        - --freeswitch.password=ClueCon
         ports:
         - containerPort: 9282
           name: metrics
