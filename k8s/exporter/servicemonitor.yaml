@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: freeswitch_exporter_servicemonitor
+  namespace: freeswitch
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: freeswitch-exporter
+  endpoints:
+  - port: metrics 
+  interval: 5s
