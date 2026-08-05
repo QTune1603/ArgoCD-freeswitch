@@ -19,7 +19,7 @@ spec:
       - name: freeswitch-exporter
         image: florentchauveau/freeswitch_exporter:latest
         args:
-        - --freeswitch.address=freeswitch-service:8021
+        - --freeswitch.scrape-uri=tcp://freeswitch-service:8021
         - --freeswitch.password=ClueCon
         ports:
         - containerPort: 9282
