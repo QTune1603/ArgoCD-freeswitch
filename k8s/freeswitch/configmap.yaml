@@ -22,3 +22,65 @@ data:
         </list>
       </network-lists>
     </configuration>
+  vars.xml: |
+    <include>
+      <X-PRE-PROCESS cmd="set" data="default_password=1234"/>
+      <X-PRE-PROCESS cmd="set" data="sound_prefix=$${sounds_dir}/en/us/callie"/>
+      <X-PRE-PROCESS cmd="set" data="domain=$${local_ip_v4}"/>
+      <X-PRE-PROCESS cmd="set" data="domain_name=$${domain}"/>
+      <X-PRE-PROCESS cmd="set" data="hold_music=local_stream://default"/>
+      <X-PRE-PROCESS cmd="set" data="external_auth_calls=false"/>
+      <X-PRE-PROCESS cmd="set" data="bind_server_ip=auto"/>
+      <X-PRE-PROCESS cmd="set" data="external_sip_ip=auto"/>
+      <X-PRE-PROCESS cmd="set" data="external_rtp_ip=auto"/>
+      <X-PRE-PROCESS cmd="set" data="internal_auth_calls=true"/>
+      <X-PRE-PROCESS cmd="set" data="internal_sip_port=5060"/>
+      <X-PRE-PROCESS cmd="set" data="internal_tls_port=5061"/>
+      <X-PRE-PROCESS cmd="set" data="external_sip_port=5080"/>
+      <X-PRE-PROCESS cmd="set" data="external_tls_port=5081"/>
+    </include>
+  1000.xml: |
+    <include>
+      <user id="1000">
+        <params>
+          <param name="password" value="1234"/>
+          <param name="vm-password" value="1000"/>
+        </params>
+        <variables>
+          <variable name="toll_allow" value="domestic,international,local"/>
+          <variable name="accountcode" value="1000"/>
+          <variable name="user_context" value="default"/>
+          <variable name="effective_caller_id_name" value="Extension 1000"/>
+          <variable name="effective_caller_id_number" value="1000"/>
+          <variable name="outbound_caller_id_name" value="$${outbound_caller_name}"/>
+          <variable name="outbound_caller_id_number" value="$${outbound_caller_id}"/>
+          <variable name="callgroup" value="techsupport"/>
+        </variables>
+      </user>
+    </include>
+  freeswitch.xml: |
+    <?xml version="1.0"?>
+    <document type="freeswitch/xml">
+      <X-PRE-PROCESS cmd="include" data="vars.xml"/>
+      <section name="configuration" description="Various Configuration">
+        <X-PRE-PROCESS cmd="include" data="autoload_configs/*.xml"/>
+      </section>
+      <section name="dialplan" description="Regex/XML Dialplan">
+        <X-PRE-PROCESS cmd="include" data="dialplan/*.xml"/>
+      </section>
+      <section name="chatplan" description="Regex/XML Chatplan">
+        <X-PRE-PROCESS cmd="include" data="chatplan/*.xml"/>
+      </section>
+      <section name="directory" description="User Directory">
+        <X-PRE-PROCESS cmd="include" data="directory/*.xml"/>
+      </section>
+      <section name="languages" description="Language Management">
+        <X-PRE-PROCESS cmd="include" data="lang/de/*.xml"/>
+        <X-PRE-PROCESS cmd="include" data="lang/en/*.xml"/>
+        <X-PRE-PROCESS cmd="include" data="lang/fr/*.xml"/>
+        <X-PRE-PROCESS cmd="include" data="lang/ru/*.xml"/>
+      </section>
+    </document>
+
+
+
