@@ -18,13 +18,11 @@ spec:
       containers:
       - name: freeswitch-exporter
         image: florentchauveau/freeswitch_exporter:latest
-        env:
-        - name: FREESWITCH_SERVER
-          value: "freeswitch-service"
-        - name: FREESWITCH_PORT
-          value: "8021"
-        - name: FREESWITCH_PASSWORD
-          value: "ClueCon"
+        args:
+        - -server
+        - freeswitch-service:8021
+        - -password
+        - ClueCon
         ports:
         - containerPort: 9282
           name: metrics
