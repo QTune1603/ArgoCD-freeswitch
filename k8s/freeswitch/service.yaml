@@ -4,6 +4,7 @@ metadata:
   name: freeswitch-service
   namespace: freeswitch
 spec:
+  type: NodePort
   selector:
     app: freeswitch
   ports:
@@ -12,10 +13,11 @@ spec:
     name: esl
   - port: 5060
     targetPort: 5060
+    nodePort: 30060
     name: sip-udp
     protocol: UDP
   - port: 5060
     targetPort: 5060
+    nodePort: 30060
     name: sip-tcp
     protocol: TCP
-    
