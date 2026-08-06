@@ -18,35 +18,6 @@ Thiết lập GitOps với ArgoCD: Quản lý K8s Manifests / ConfigMap trên Gi
 Thiết lập Monitoring với Prometheus & Grafana: Thu thập metrics real-time từ FreeSWITCH (active calls, channels, CPS, CPU/RAM) và vẽ Dashboard trên Grafana.
 
 
-+-------------------------------------------------+
-                   |                Git Repository                   |
-                   |  (K8s Manifests: FreeSWITCH, Exporter, Config)  |
-                   +------------------------+------------------------+
-                                            |
-                                            | ArgoCD Sync
-                                            v
-+-----------------------------------------------------------------------------------+
-|                               Kubernetes Cluster                                  |
-|                                                                                   |
-|  +--------------------------+          +--------------------------------------+  |
-|  |     FreeSWITCH Pod       |          |     FreeSWITCH Exporter Pod         |  |
-|  |  - FreeSWITCH Engine     |   ESL    |  - Polls FS via ESL                  |  |
-|  |  - Event Socket (8021)   |<-------->|  - Exposes /metrics (9282)          |  |
-|  +--------------------------+          +----------------───+------------------+  |
-|                                                            |                      |
-|                                                            | Scrape Metrics       |
-|                                                            v                      |
-|                                        +-------------------+------------------+  |
-|                                        |          Prometheus Server           |  |
-|                                        +----------------───+------------------+  |
-|                                                            |                      |
-|                                                            | DataSource           |
-|                                                            v                      |
-|                                        +-------------------+------------------+  |
-|                                        |          Grafana Dashboard           |  |
-|                                        +--------------------------------------+  |
-+-----------------------------------------------------------------------------------+
-
 Phase 1: Chuẩn bị môi trường Kubernetes local
 
 Phase 2: Soạn thảo Kubernetes Manifests cho FreeSWITCH & Exporter
